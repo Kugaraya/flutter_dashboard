@@ -1,5 +1,5 @@
-import 'package:admin/responsive.dart';
-import 'package:admin/screens/dashboard/components/my_fields.dart';
+import 'package:passo_dashboard/responsive.dart';
+import 'package:passo_dashboard/screens/dashboard/components/my_fields.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
@@ -30,7 +30,7 @@ class DashboardScreen extends StatelessWidget {
                       RecentFiles(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context)) StarageDetails(),
+                      if (Responsive.isMobile(context)) StorageDetails(),
                     ],
                   ),
                 ),
@@ -40,7 +40,7 @@ class DashboardScreen extends StatelessWidget {
                 if (!Responsive.isMobile(context))
                   Expanded(
                     flex: 2,
-                    child: StarageDetails(),
+                    child: StorageDetails(),
                   ),
               ],
             )

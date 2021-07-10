@@ -1,34 +1,40 @@
-import 'package:admin/constants.dart';
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/screens/main/main_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:passo_dashboard/constants.dart';
+import 'package:passo_dashboard/core/locator.dart';
+import 'package:passo_dashboard/core/providers.dart';
+import 'package:passo_dashboard/core/services/cache_service.dart';
+import 'package:passo_dashboard/core/services/navigator_service.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  await LocatorInjector.setupLocator();
+  WidgetsFlutterBinding.ensureInitialized();
+  locator<NavigatorService>().createRoutes();
+  locator<CacheService>().initValues();
+  runApp(MainApplication());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MainApplication extends StatelessWidget with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Admin Panel',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: bgColor,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
-        canvasColor: secondaryColor,
-      ),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => MenuController(),
-          ),
+    return MultiProvider(
+      providers: ProviderInjector.providers,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        supportedLocales: [
+          Locale('en', ''),
         ],
-        child: MainScreen(),
+        title: 'PAssO Dashboard',
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: bgColor,
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+              .apply(bodyColor: Colors.white),
+          canvasColor: secondaryColor,
+        ),
+        navigatorKey: locator<NavigatorService>().navigatorKey,
+        onGenerateRoute: locator<NavigatorService>().generator,
+        initialRoute: '/',
       ),
     );
   }

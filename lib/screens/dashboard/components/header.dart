@@ -1,5 +1,5 @@
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/responsive.dart';
+import 'package:passo_dashboard/core/controllers/MenuController.dart';
+import 'package:passo_dashboard/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -62,7 +62,7 @@ class ProfileCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Angelina Joli"),
+              child: Text("Account Name"),
             ),
           Icon(Icons.keyboard_arrow_down),
         ],
