@@ -10,6 +10,7 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           DrawerHeader(
             child: Image.asset("assets/images/logo.png"),

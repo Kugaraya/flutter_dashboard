@@ -9,11 +9,18 @@ import 'components/recent_files.dart';
 import 'components/storage_details.dart';
 
 class DashboardScreen extends StatelessWidget {
+  final ScrollController _scrollController = ScrollController(
+    initialScrollOffset: 0,
+    keepScrollOffset: false
+  );
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
+        controller: _scrollController,
         padding: EdgeInsets.all(defaultPadding),
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Header(),
